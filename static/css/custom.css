@@ -2,4 +2,9 @@
 	#navbar {
 		width: 80%;
 	}
+
+	#searchContainer {
+		padding: 40px 20px;
+	}
+
 }

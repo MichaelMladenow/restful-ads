@@ -4,7 +4,8 @@ from django.conf.urls import patterns, include, url
 # admin.autodiscover()
 
 urlpatterns = patterns('',
-	url(r'^$', 'adsRest.core.views.show_player'),
+	url(r'^$', 'adsRest.core.views.search_player'),
+	url(r'^search/$', 'adsRest.core.views.search_player'),
 	url(r'^player/(?P<tag>[A-Za-z]+)-(?P<id>[0-9]{4})/$', 'adsRest.core.views.show_player'),
     # Examples:
     # url(r'^$', 'adsRest.views.home', name='home'),

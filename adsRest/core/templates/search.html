@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>{{ page.title }}</title>
+	<head lang="en">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- STATIC::START -->
+	{% load staticfiles %}
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/custom.css' %}">
+	<script type="text/javascript" src="{% static 'js/searchManager.js' %}"></script>
+	<!-- STATIC::END -->
+</head>
+<body>
+<header>
+	<!-- HEADER::START -->
+	{% include 'header.html' %} 
+	<!-- HEADER::END -->
+</header>	
+<main id="searchContainer">
+	<!-- CONTENT::START -->
+	<div class="container search-nav">
+		<ul class="nav nav-tabs">
+			<li role="presentation" data-target="searchPlayer" class="active"><a href="#">Players</a></li>
+			<li role="presentation" data-target="searchItem"><a href="#">Items</a></li>
+		</ul>
+	</div>
+	<div class="jumbotron container" id="searchContainer">
+		<form id="searchPlayer">
+			<h2>Please enter a player's battle tag and region to search.</h2>
+			<div class="input-group container row">
+					<input type="text" class="form-control" id="battleTag" placeholder="Enter Battle Tag (e.g. Steve#1234)">
+					<span class="input-group-btn">
+						<button onClick="submitSearch($(this))" class="btn btn-default" data-target="battleTag" type="button">Search!</button>
+					</span>
+			</div>
+    	</form>
+    	<form id="searchItem" style="display: none;" id="itemForm">
+			<h2>Item searching is currently disabled.</h2>
+    	</form>
+	</div>
+	<!-- CONTENT::END -->
+</main>
+<footer>
+	<!-- FOOTER:START -->
+	{% include 'footer.html' %} 
+	<!-- FOOTER:END -->
+</footer>
+
+<!-- STATIC-EXTRA:START -->
+
+
+<!-- STATIC-EXTRA:END -->
+</body>
+</html>
