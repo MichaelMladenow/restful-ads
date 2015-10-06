@@ -7,4 +7,18 @@
 		padding: 40px 20px;
 	}
 
+
+}
+.invalid-tag {
+    border: 2px solid #F37373;
+    background-color: #F3E7E7;
+}
+
+.valid-tag {
+    background-color: #DDF3DD;
+    border: 2px solid #67D618;
+}
+
+.title.tag {
+	text-align: center;
 }

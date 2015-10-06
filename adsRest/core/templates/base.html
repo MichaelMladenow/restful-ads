@@ -22,7 +22,36 @@
 </header>	
 <main>
 	<!-- CONTENT::START -->
-	{{ playerData.battle_tag }}
+		<div class="player container container-fluid jumbotron">
+		{{debugData}}
+			<h1 class="title tag"> {{ playerData.battle_tag }} </h1>
+			<div class="separator"></div>
+			<div class="paragon"> {{ playerData.paragon }} </div>
+			<div class="heroes">
+				{% for eachHero in playerData.heroes %}
+				    <div class="hero" style="background-image: url('{{ eachHero.heroImage }}')">
+				    	<table>
+				    		<tr>
+				    			<th>Attribute</th>
+				    			<th>Value</th>
+					    	</tr>
+					    	<tr>
+					    		<td>Class</td>
+					    		<td> {{ eachHero.heroClass }} </td>
+					    	</tr>
+					    	<tr>
+					    		<td>Gender</td>
+					    		<td> {{ eachHero.gender }} </td>
+					    	</tr>
+					    	<tr>
+					    		<td>Paragon</td>
+					    		<td> {{ eachHero.paragon }} </td>
+					    	</tr>
+				    	</table>
+				    </div>
+				{% endfor %}
+			</div>
+		</div>
 	<!-- CONTENT::END -->
 </main>
 <footer>

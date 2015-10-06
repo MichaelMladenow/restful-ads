@@ -27,3 +27,6 @@ def appendParams(url, params):
 		if isFirstParam:
 			isFirstParam = False
 	return output_url
+
+def getHeroImage(hero):
+	#TODO: GET THE FUCKING HERO IMG
