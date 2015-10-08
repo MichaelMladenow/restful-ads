@@ -23,28 +23,27 @@
 <main>
 	<!-- CONTENT::START -->
 		<div class="player container container-fluid jumbotron">
-		{{debugData}}
 			<h1 class="title tag"> {{ playerData.battle_tag }} </h1>
+			<h2 class="title guild">{{ playerData.guild_name }}</h2>
 			<div class="separator"></div>
-			<div class="paragon"> {{ playerData.paragon }} </div>
 			<div class="heroes">
 				{% for eachHero in playerData.heroes %}
-				    <div class="hero" style="background-image: url('{{ eachHero.heroImage }}')">
+				    <div class="hero" style="background-image: url('{{ eachHero.getHeroBackground }}')" data-hero-id="{{ eachHero.getHeroId }}">
 				    	<table>
-				    		<tr>
-				    			<th>Attribute</th>
-				    			<th>Value</th>
+					    	<tr class="row">
+					    		<td class="strong">Name</td>
+					    		<td> {{ eachHero.name }} </td>
 					    	</tr>
-					    	<tr>
-					    		<td>Class</td>
+					    	<tr class="row">
+					    		<td class="strong">Class</td>
 					    		<td> {{ eachHero.heroClass }} </td>
 					    	</tr>
-					    	<tr>
-					    		<td>Gender</td>
+					    	<tr class="row">
+					    		<td class="strong">Gender</td>
 					    		<td> {{ eachHero.gender }} </td>
 					    	</tr>
-					    	<tr>
-					    		<td>Paragon</td>
+					    	<tr class="row">
+					    		<td class="strong">Paragon</td>
 					    		<td> {{ eachHero.paragon }} </td>
 					    	</tr>
 				    	</table>

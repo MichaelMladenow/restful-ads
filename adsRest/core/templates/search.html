@@ -34,6 +34,18 @@
 		<form id="searchPlayer">
 			<h2>Please enter a player's battle tag and region to search.</h2>
 			<div class="input-group container row">
+				<div class="dropdown">
+					<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">Region<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+						<li><a href="#">Europe</a></li>
+						<li><a href="#">United States</a></li>
+						<li><a href="#">Korea</a></li>
+						<li><a href="#">Taiwan</a></li>
+					</ul>
+				</div>
+			</div>
+			<div class="input-group container row">
 					<input type="text" class="form-control" id="battleTag" placeholder="Enter Battle Tag (e.g. Steve#1234)">
 					<span class="input-group-btn">
 						<input class="btn btn-default" data-target="battleTag" type="submit" value="Search!"></input>

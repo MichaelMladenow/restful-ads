@@ -19,6 +19,27 @@
     border: 2px solid #67D618;
 }
 
-.title.tag {
+.title.tag, .title.guild {
 	text-align: center;
+}
+
+.title.guild {
+    color: #69B160;
+}
+
+.heroes {
+	/* Center the heroes */
+	text-align: center;
+}
+
+.hero {
+    width: 47%;
+    display: inline-block;
+    padding: 1em;
+    color: white;
+    background-size: cover;
+}
+
+.hero tr.row td {
+    padding: 0.5em;
 }

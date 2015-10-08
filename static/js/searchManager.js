@@ -52,7 +52,11 @@ $(function() {
 
 function isValid(tag) {
 	/* Validates that string is a valid
-	 *  Blizzard battle tag.	 */
+	 * Blizzard battle tag.
+	 * Params:
+	 *		tag - string
+	 * Return type: bool
+	 */
 	var battleTagPattern = '([A-Za-z])+#([0-9]{4})';
 	return !!tag.match(battleTagPattern);
 }

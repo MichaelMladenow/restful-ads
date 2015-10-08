@@ -1,4 +1,5 @@
 PAPERDOLL_URL = '/d3/static/images/profile/hero/paperdoll/'
+BACKGROUND_URL = 'http://%s.battle.net/d3/static/images/hero/%s/bg.jpg'
 HOST_URL = '.api.battle.net'
 
 class Player(object):
@@ -9,7 +10,7 @@ class Player(object):
         self.guild_name = guildName
         self.heroes = []
         for eachHero in heroes:
-            tempHero = Hero(eachHero['name'], eachHero['level'], eachHero['paragonLevel'], eachHero['gender'], eachHero['class'])
+            tempHero = Hero(eachHero['name'], eachHero['level'], eachHero['paragonLevel'], eachHero['gender'], eachHero['class'], eachHero['id'])
             self.heroes.append(tempHero)
 
     def __str__(self):
@@ -20,16 +21,24 @@ class Player(object):
 
 
 class Hero(object):
-    def __init__(self, name, level, paragonLevel, gender, heroClass, region="eu"):
+    def __init__(self, name, level, paragon, gender, heroClass, heroID, region = "eu"):
         self.name = name
         self.level = level
-        self.paragon_level = paragonLevel
+        self.paragon = paragon
         self.gender = 'Male' if (gender == 0) else 'Female'
         self.heroClass = heroClass
+        self.region = region
+        self._id = heroID
 
     def __str__(self):
         return '%d level %s' % (self.level, self.heroClass)
 
+    def getHeroId(self):
+        return str(self._id)
+
+    def getHeroBackground(self):
+    	""" Returns absolute path to hero's background image """
+    	return BACKGROUND_URL % (self.region, self.heroClass)
 
 class Paragon(object):
     #TODO: Check normal hardcore
@@ -38,6 +47,7 @@ class Paragon(object):
         self.seasonal = seasonal
         self.normalHardcore = normalHardcore
         self.seasonalHardcore = seasonalHardcore
+        
     def __str__(self):
-        output = 'Normal level: %d, Seasonal level: %d, Seasonal Hardcore level: %d' % (self.normal, self.seasonal, self.seasonalHardcore)
+        output = 'Normal: %d, Seasonal: %d, Seasonal Hardcore: %d' % (self.normal, self.seasonal, self.seasonalHardcore)
         return output
