@@ -30,8 +30,31 @@ class Hero(object):
         self.region = region
         self._id = heroID
 
+
+	def classNameGet(self):
+		return self.name
+
     def __str__(self):
         return '%d level %s' % (self.level, self.heroClass)
+
+    def className(self, *args):
+    	""" Get the class name 
+			*possible params:
+				'upper' - return the class name in upper case
+				'lower' - return the class name in lower case
+				'capitalize' - return the class name in capital case 
+				'normalize' - cleans out the junk characters(dash '-')
+			E.g. usage hero.getClassName('lower', 'normalize')
+    	"""
+    	name = self.heroClass.replace('-', ' ') if 'normalize' in args else self.heroClass 
+    	if 'capitalize' in args:
+    		return name.capitalize()
+    	elif 'lower' in args:
+    		return name.lower()
+    	elif 'upper' in args:
+    		return name.upper()
+    	else:
+			return self.className('capitalize', 'normalize')
 
     def getHeroId(self):
         return str(self._id)

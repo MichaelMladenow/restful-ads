@@ -17,7 +17,7 @@ def show_player(request, tag=None, id=None):
                     guildName = playerData['guildName'],
                     heroes = playerData['heroes'])
     return render(request, 'base.html', {'playerData': player,
-                  'debugData': playerData})
+                  'debugData': dir(player.heroes[0])})
 
 
 def search_player(request):
