@@ -28,6 +28,7 @@ def _appendParams(url, params):
 	return output_url
 
 def ParseHero(hero, localization):
+    """ Create a hero object from a dict """
     try:
         character = Hero(
                 name = hero['name'],
@@ -50,4 +51,5 @@ def ParseHeroes(hero_list, localization):
     return heroes
 
 def Tag(name, player_id, separator='-'):
+    """ Get tag by name and id, optional = separator(char) """
     return name + separator + player_id

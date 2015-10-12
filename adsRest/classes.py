@@ -1,10 +1,10 @@
 from adsRest.constants import *
 
 class Player(object):
+    """ A player | D3 BattleNET account """
     def __init__(self, battle_tag, paragon, guild_name, heroes):
         self.battle_tag = battle_tag
-        #TODO: PARAGONERINO
-        self.paragon = Paragon(paragon['normal'], paragon['seasonal'], paragon['seasonal_hardcore'])
+        self.paragon = paragon
         self.guild_name = guild_name
         self.heroes = []
         self.AddHeroes(heroes)
@@ -13,19 +13,23 @@ class Player(object):
         return self.battle_tag + ' Heroes : ' + self.__getHeroCount()
 
    	def _getHeroCount(self):
+        """ Returns the amount of heroes this player has """
 		return len(self.heroes)
 
     def AddHero(self, hero):
+        """ Assign a hero to a player """
         if isinstance(hero, Hero):
             self.heroes.append(hero)
         else:
             raise AssertionError('%s is not a valid hero. Could not add to hero list.' % hero)
 
     def AddHeroes(self, hero_list):
+        """ Assign multiple heroes to a player """
         for each_hero in hero_list:
             self.AddHero(each_hero)
 
 class Hero(object):
+    """ Diablo 3 Hero """
     def __init__(self, name, level, paragon, gender, hero_class, hero_id, seasonal, hardcore, locale):
         self.name = name
         self.level = level
@@ -37,7 +41,8 @@ class Hero(object):
         self.is_hardcore = hardcore
         self.locale = locale
 
-	def classNameGet(self):
+	def ClassName(self):
+        """ Get a hero's classname """
 		return self.name
 
     def __str__(self):
@@ -63,14 +68,18 @@ class Hero(object):
 			return self.className('capitalize', 'normalize')
 
     def getHeroId(self):
+        """ TODO: Restrict access """
         return str(self._id)
 
     def Portrait(self):
-    	""" Returns absolute path to hero's background image """
+    	""" Returns absolute path to hero's background image
+            Based on hero's class and region
+        """
     	return BACKGROUND_URL % (self.locale, self.hero_class)
 
 class Paragon(object):
-    #TODO: Check normal hardcore
+    """ Paragon levels """
+    """ TODO: Improve Paragon structure/assignment """
     def __init__(self, normal, seasonal, seasonal_hardcore = None, normal_hardcore = None):
         self.normal = normal
         self.seasonal = seasonal
@@ -82,7 +91,7 @@ class Paragon(object):
         return output
 
 class Skill(object):
-
+    """ Diablo 3 Spell """
     def __init__(self, slug, name, icon, tooltip_url, description, simple_description, runes, is_active = False):
     	self.slug = slugs
     	self.name = name
@@ -94,7 +103,7 @@ class Skill(object):
     	self.is_active = is_active
 
 class Rune(object):
-	
+    """ Diablo 3 Spell Rune """
 	def __init__(self, name, skill_slug,  description, simple_description, tooltip_params):
 		self.name = name
 		self.slug = slug
@@ -103,7 +112,7 @@ class Rune(object):
 		self.tooltip_params = tooltip_params
 
 class Item(object):
-
+    """ Diablo 3 Spell Rune """
     def __init__(self, id, name, icon, display_color, tooltip_params, transmog_item = None):
         self.id = id
         self.name = name
@@ -113,6 +122,8 @@ class Item(object):
         self.transmog_item = transmog_item
 
     def Rarity(self):
+        """ Get Item Rarity """
+        #TODO: Test dat shit
         if display_color.lower() == 'orange':
             return 'Legendary'
         elif display_color.lower() == 'green':

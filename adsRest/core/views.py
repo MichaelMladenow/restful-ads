@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from adsRest.utils import GetPlayer, GetHero, ParseHeroes
-from adsRest.classes import Player
+from adsRest.classes import Player, Paragon
 from adsRest.constants import *
 
 
@@ -26,7 +26,7 @@ def show_player(request, tag=None, id=None, locale=None):
                 }
 
         player = Player(battle_tag = player_data['battleTag'],
-                        paragon = player_paragon,
+                        paragon = Paragon(player_paragon),
                         guild_name = player_data['guildName'],
                         heroes = ParseHeroes(player_data['heroes'], locale))
         return render(request, 'player.html', {'player_data': player})
