@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from adsRest.utils import GetPlayer
+from adsRest.utils import GetPlayer, GetHero, ParseHeroes
 from adsRest.classes import Player
 from adsRest.constants import *
 
@@ -14,29 +14,30 @@ def show_player(request, tag=None, id=None, locale=None):
         """ Assert that the player was found """
         error_data = {
             'target': 'Player',
-            'message': 'Player %s#%s could not be found in the %s servers.' % (tag, id, locale.upper())}
+            'message': 'Player %s#%s could not be found in the %s servers.' % (tag, id, locale.upper())
+        }
         return render(request, 'notfound.html', {'error_data': error_data})
 
     else:
-        player_paragon = {'normal': player_data['paragonLevel'],
-                         'seasonal': player_data['paragonLevelSeason'],
-                         'seasonal_hardcore': player_data['paragonLevelSeasonHardcore']
-                        }
+        player_paragon = {
+                    'normal': player_data['paragonLevel'],
+                    'seasonal': player_data['paragonLevelSeason'],
+                    'seasonal_hardcore': player_data['paragonLevelSeasonHardcore']
+                }
 
-        player = Player(battleTag = player_data['battleTag'],
+        player = Player(battle_tag = player_data['battleTag'],
                         paragon = player_paragon,
-                        guildName = player_data['guildName'],
-                        heroes = player_data['heroes'])
-        return render(request, 'base.html', {'player_data': player,
-                      'debugData': dir(player.heroes[0]),
-                      'locDebug': locale})
+                        guild_name = player_data['guildName'],
+                        heroes = ParseHeroes(player_data['heroes'], locale))
+        return render(request, 'player.html', {'player_data': player})
 
 
-def search_player(request, locale='eu'):
-    """The search view."""
+def search_player(request, locale=None):
+    """The search view. Simple stuff. """
+    locale = locale or 'eu'
+    return render(request, 'search.html')
 
-    return render(request, 'search.html', {'locDebug': locale})
-
-def show_hero(requst, playerTag, heroID, locale='eu'):
-    return false
-
+def show_hero(request, tag, id, hero_id, locale='eu'):
+    locale = locale or 'eu'
+    hero_data = GetHero(tag, id, hero_id, locale).json()
+    return render(request, 'hero.html', {'hero_data': hero_data})

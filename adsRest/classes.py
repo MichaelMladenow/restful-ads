@@ -1,15 +1,13 @@
 from adsRest.constants import *
 
 class Player(object):
-    def __init__(self, battleTag, paragon, guildName, heroes):
-        self.battle_tag = battleTag
+    def __init__(self, battle_tag, paragon, guild_name, heroes):
+        self.battle_tag = battle_tag
         #TODO: PARAGONERINO
         self.paragon = Paragon(paragon['normal'], paragon['seasonal'], paragon['seasonal_hardcore'])
-        self.guild_name = guildName
+        self.guild_name = guild_name
         self.heroes = []
-        for eachHero in heroes:
-            tempHero = Hero(eachHero['name'], eachHero['level'], eachHero['paragonLevel'], eachHero['gender'], eachHero['class'], eachHero['id'])
-            self.heroes.append(tempHero)
+        self.AddHeroes(heroes)
 
     def __str__(self):
         return self.battle_tag + ' Heroes : ' + self.__getHeroCount()
@@ -17,21 +15,33 @@ class Player(object):
    	def _getHeroCount(self):
 		return len(self.heroes)
 
+    def AddHero(self, hero):
+        if isinstance(hero, Hero):
+            self.heroes.append(hero)
+        else:
+            raise AssertionError('%s is not a valid hero. Could not add to hero list.' % hero)
+
+    def AddHeroes(self, hero_list):
+        for each_hero in hero_list:
+            self.AddHero(each_hero)
+
 class Hero(object):
-    def __init__(self, name, level, paragon, gender, heroClass, heroID, region = "eu"):
+    def __init__(self, name, level, paragon, gender, hero_class, hero_id, seasonal, hardcore, locale):
         self.name = name
         self.level = level
         self.paragon = paragon
         self.gender = 'Male' if (gender == 0) else 'Female'
-        self.heroClass = heroClass
-        self.region = region
-        self._id = heroID
+        self.hero_class = hero_class
+        self._id = hero_id
+        self.is_seasonal = seasonal
+        self.is_hardcore = hardcore
+        self.locale = locale
 
 	def classNameGet(self):
 		return self.name
 
     def __str__(self):
-        return '%d level %s' % (self.level, self.heroClass)
+        return '%d level %s' % (self.level, self.hero_class)
 
     def className(self, *args):
     	""" Get the class name 
@@ -42,7 +52,7 @@ class Hero(object):
 				'normalize' - cleans out the junk characters(dash '-')
 			E.g. usage hero.getClassName('lower', 'normalize')
     	"""
-    	name = self.heroClass.replace('-', ' ') if 'normalize' in args else self.heroClass 
+    	name = self.hero_class.replace('-', ' ') if 'normalize' in args else self.hero_class 
     	if 'capitalize' in args:
     		return name.capitalize()
     	elif 'lower' in args:
@@ -55,9 +65,9 @@ class Hero(object):
     def getHeroId(self):
         return str(self._id)
 
-    def getHeroBackground(self):
+    def Portrait(self):
     	""" Returns absolute path to hero's background image """
-    	return BACKGROUND_URL % (self.region, self.heroClass)
+    	return BACKGROUND_URL % (self.locale, self.hero_class)
 
 class Paragon(object):
     #TODO: Check normal hardcore
@@ -91,3 +101,29 @@ class Rune(object):
 		self.description = description
 		self.simple_description = simple_description
 		self.tooltip_params = tooltip_params
+
+class Item(object):
+
+    def __init__(self, id, name, icon, display_color, tooltip_params, transmog_item = None):
+        self.id = id
+        self.name = name
+        self.icon = icon
+        self.display_color = display_color
+        self.tooltip_params = tooltip_params
+        self.transmog_item = transmog_item
+
+    def Rarity(self):
+        if display_color.lower() == 'orange':
+            return 'Legendary'
+        elif display_color.lower() == 'green':
+            return 'Set'
+        elif display_color.lower() == 'yellow':
+            return 'Epic'
+        elif display_color.lower() == 'blue':
+            return 'Rare'
+        elif display_color.lower() == 'white':
+            return 'Common'
+        elif display_color.lower() == 'grey':
+            return 'Junk'
+        else:
+            return 'UNINDENTIFIED'
