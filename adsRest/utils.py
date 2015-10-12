@@ -50,6 +50,14 @@ def ParseHeroes(hero_list, localization):
         heroes.append(ParseHero(each_hero, localization))
     return heroes
 
+def FetchSuccessful(request_dict):
+    """ Assert that the query found something """
+    return not ('code' in request_dict.iterkeys() and request_dict['code'] == 'NOTFOUND')
+
+def GetItm():
+    #TODO: implement
+    pass
+
 def Tag(name, player_id, separator='-'):
     """ Get tag by name and id, optional = separator(char) """
     return name + separator + player_id

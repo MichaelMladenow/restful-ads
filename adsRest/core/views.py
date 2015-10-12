@@ -1,35 +1,32 @@
 from django.shortcuts import render
-from adsRest.utils import GetPlayer, GetHero, ParseHeroes
+from adsRest.utils import *
 from adsRest.classes import Player, Paragon
 from adsRest.constants import *
 
 
 def show_player(request, tag=None, id=None, locale=None):
-    """A view of the player."""
+    """A view of the player. Includes:
+        - Player name
+        - Player guild
+        - Player paragon
+        - Player heroes
+        - Hero Preview
+    """
     locale = locale or 'eu'
     player_data = GetPlayer(tag, id, locale).json()
 
-
-    if 'code' in player_data.iterkeys() and player_data['code'] == 'NOTFOUND':
-        """ Assert that the player was found """
-        error_data = {
-            'target': 'Player',
-            'message': 'Player %s#%s could not be found in the %s servers.' % (tag, id, locale.upper())
-        }
-        return render(request, 'notfound.html', {'error_data': error_data})
-
-    else:
-        player_paragon = {
-                    'normal': player_data['paragonLevel'],
-                    'seasonal': player_data['paragonLevelSeason'],
-                    'seasonal_hardcore': player_data['paragonLevelSeasonHardcore']
-                }
+    if FetchSuccessful(player_data):
+        #TODO: Export paragon fetch into utils, it's polluting the views :(
+        player_paragon = Paragon(player_data['paragonLevel'], player_data['paragonLevelSeason'], player_data['paragonLevelSeasonHardcore'])
 
         player = Player(battle_tag = player_data['battleTag'],
-                        paragon = Paragon(player_paragon),
+                        paragon = player_paragon,
                         guild_name = player_data['guildName'],
                         heroes = ParseHeroes(player_data['heroes'], locale))
         return render(request, 'player.html', {'player_data': player})
+    else:
+        return render(request, 'notfound.html', {'error_data': Tag(tag,id)})
+
 
 
 def search_player(request, locale=None):

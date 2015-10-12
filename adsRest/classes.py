@@ -12,9 +12,9 @@ class Player(object):
     def __str__(self):
         return self.battle_tag + ' Heroes : ' + self.__getHeroCount()
 
-   	def _getHeroCount(self):
+    def _getHeroCount(self):
         """ Returns the amount of heroes this player has """
-		return len(self.heroes)
+        return len(self.heroes)
 
     def AddHero(self, hero):
         """ Assign a hero to a player """
@@ -41,9 +41,9 @@ class Hero(object):
         self.is_hardcore = hardcore
         self.locale = locale
 
-	def ClassName(self):
+    def ClassName(self):
         """ Get a hero's classname """
-		return self.name
+        return self.name
 
     def __str__(self):
         return '%d level %s' % (self.level, self.hero_class)
@@ -104,12 +104,12 @@ class Skill(object):
 
 class Rune(object):
     """ Diablo 3 Spell Rune """
-	def __init__(self, name, skill_slug,  description, simple_description, tooltip_params):
-		self.name = name
-		self.slug = slug
-		self.description = description
-		self.simple_description = simple_description
-		self.tooltip_params = tooltip_params
+    def __init__(self, name, skill_slug,  description, simple_description, tooltip_params):
+        self.name = name
+        self.slug = slug
+        self.description = description
+        self.simple_description = simple_description
+        self.tooltip_params = tooltip_params
 
 class Item(object):
     """ Diablo 3 Spell Rune """
