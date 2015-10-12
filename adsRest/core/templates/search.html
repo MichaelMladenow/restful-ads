@@ -26,11 +26,11 @@
 	<!-- CONTENT::START -->
 	<div class="container search-nav">
 		<ul class="nav nav-tabs">
-			<li role="presentation" data-target="searchPlayer" class="active"><a href="#">Players</a></li>
+			<li role="presentation" data-target="searchPlayer" class="active"><a href="#">Players{{ locDebug}}</a></li>
 			<li role="presentation" data-target="searchItem"><a href="#">Items</a></li>
 		</ul>
 	</div>
-	<div class="jumbotron container" id="searchContainer">
+	<div class="jumbotron container">
 		<form id="searchPlayer">
 			<h2>Please enter a player's battle tag and region to search.</h2>
 			<div class="input-group container row">
@@ -63,10 +63,5 @@
 	{% include 'footer.html' %} 
 	<!-- FOOTER:END -->
 </footer>
-
-<!-- STATIC-EXTRA:START -->
-
-
-<!-- STATIC-EXTRA:END -->
 </body>
 </html>

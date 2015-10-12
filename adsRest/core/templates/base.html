@@ -16,7 +16,7 @@
 	<!-- STATIC::END -->
 </head>
 <body>
-<header>
+<header id="header">
 	<!-- HEADER::START -->
 	{% include 'header.html' %} 
 	<!-- HEADER::END -->
@@ -24,11 +24,11 @@
 <main>
 	<!-- CONTENT::START -->
 		<div class="player container container-fluid jumbotron">
-			<h1 class="title tag"> {{ playerData.battle_tag }} </h1>
-			<h2 class="title guild">{{ playerData.guild_name }}</h2>
+			<h1 class="title tag"> {{ player_data.battle_tag }} </h1>
+			<h2 class="title guild">{{ player_data.guild_name }}</h2>
 			<div class="separator"></div>
 			<div class="heroes">
-				{% for eachHero in playerData.heroes %}
+				{% for eachHero in player_data.heroes %}
 				    <div class="hero" style="background-image: url('{{ eachHero.getHeroBackground }}')" data-hero-id="{{ eachHero.getHeroId }}">
 				    	<table>
 					    	<tr class="row">
@@ -63,10 +63,5 @@
 	{% include 'footer.html' %} 
 	<!-- FOOTER:END -->
 </footer>
-
-<!-- STATIC-EXTRA:START -->
-
-
-<!-- STATIC-EXTRA:END -->
 </body>
 </html>

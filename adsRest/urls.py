@@ -5,8 +5,9 @@ from django.conf.urls import patterns, include, url
 
 urlpatterns = patterns('',
 	url(r'^$', 'adsRest.core.views.search_player'),
-	url(r'^search/$', 'adsRest.core.views.search_player'),
-	url(r'^player/(?P<tag>[A-Za-z]+)-(?P<id>[0-9]{4})/$', 'adsRest.core.views.show_player'),
+	url(r'^search/(?P<locale>(eu)|(us)|(kr)|(tw))$', 'adsRest.core.views.search_player'),
+	url(r'^(search/)?player/(?P<tag>[A-Za-z]+)-(?P<id>[0-9]{4})/(?P<locale>(eu)|(us)|(kr)|(tw))?$', 'adsRest.core.views.show_player'),
+	url(r'^(search/)?player/(?P<tag>[A-Za-z]+)-(?P<id>[0-9]{4})/(?P<heroId>[0-9]+)/(?P<locale>(eu)|(us)|(kr)|(tw))?$', 'adsRest.core.views.show_hero'),
     # Examples:
     # url(r'^$', 'adsRest.views.home', name='home'),
     # url(r'^adsRest/', include('adsRest.foo.urls')),

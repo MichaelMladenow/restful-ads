@@ -1,23 +1,20 @@
 import requests
-""" CONSTANTS::START """
-BASE_URL = 'https://eu.api.battle.net/d3/'
-PLAYER_SUFFIX = 'profile/%s/'
-HERO = 'player/%s/hero/%s/'
-BASE_PARAMS = {
-	'locale' : 'en_GB',
-	'apikey' : 'ar23bkxhcjssvhpa6b752v4zxgdvd3j3',
-}
-""" CONSTANTS::END """
+from adsRest.constants import *
 
-def getPlayer(tag, id, params = BASE_PARAMS):
+def GetPlayer(tag, id, locale, params = BASE_PARAMS):
 	""" Fetch player data by battle tag """
 	battle_tag = '%s-%s' % (tag, id)
-	raw_url = (BASE_URL + (PLAYER_SUFFIX % battle_tag))
-	req_url = appendParams(raw_url, params)
+	raw_url = ((BASE_URL % locale) + (PLAYER_SUFFIX % battle_tag))
+	req_url = _appendParams(raw_url, params)
 	return requests.get(req_url)
 
+def GetHero(player_tag, heroId, locale, params = BASE_PARAMS):
+    battle_tag = '%s-%s' % (tag, id)
+    raw_url = ((BASE_URL % locale) + (PLAYER_SUFFIX % player_tag) + '/' + heroId)
+    req_url = _appendParams(raw_url, params)
 
-def appendParams(url, params):
+
+def _appendParams(url, params):
 	""" Append parameters to the end of the get string url """
 	output_url = url
 	isFirstParam = True

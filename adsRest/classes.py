@@ -1,12 +1,10 @@
-PAPERDOLL_URL = '/d3/static/images/profile/hero/paperdoll/'
-BACKGROUND_URL = 'http://%s.battle.net/d3/static/images/hero/%s/bg.jpg'
-HOST_URL = '.api.battle.net'
+from adsRest.constants import *
 
 class Player(object):
     def __init__(self, battleTag, paragon, guildName, heroes):
         self.battle_tag = battleTag
         #TODO: PARAGONERINO
-        self.paragon = Paragon(paragon['normal'], paragon['seasonal'], paragon['seasonalHardcore'])
+        self.paragon = Paragon(paragon['normal'], paragon['seasonal'], paragon['seasonal_hardcore'])
         self.guild_name = guildName
         self.heroes = []
         for eachHero in heroes:
@@ -19,7 +17,6 @@ class Player(object):
    	def _getHeroCount(self):
 		return len(self.heroes)
 
-
 class Hero(object):
     def __init__(self, name, level, paragon, gender, heroClass, heroID, region = "eu"):
         self.name = name
@@ -29,7 +26,6 @@ class Hero(object):
         self.heroClass = heroClass
         self.region = region
         self._id = heroID
-
 
 	def classNameGet(self):
 		return self.name
@@ -65,12 +61,33 @@ class Hero(object):
 
 class Paragon(object):
     #TODO: Check normal hardcore
-    def __init__(self, normal, seasonal, seasonalHardcore = None, normalHardcore = None):
+    def __init__(self, normal, seasonal, seasonal_hardcore = None, normal_hardcore = None):
         self.normal = normal
         self.seasonal = seasonal
-        self.normalHardcore = normalHardcore
-        self.seasonalHardcore = seasonalHardcore
+        self.normal_hardcore = normal_hardcore
+        self.seasonal_hardcore = seasonal_hardcore
         
     def __str__(self):
-        output = 'Normal: %d, Seasonal: %d, Seasonal Hardcore: %d' % (self.normal, self.seasonal, self.seasonalHardcore)
+        output = 'Normal: %d, Seasonal: %d, Seasonal Hardcore: %d' % (self.normal, self.seasonal, self.seasonal_hardcore)
         return output
+
+class Skill(object):
+
+    def __init__(self, slug, name, icon, tooltip_url, description, simple_description, runes, is_active = False):
+    	self.slug = slugs
+    	self.name = name
+    	self.icon = icon
+    	self.tooltip_url = tooltip_url
+    	self.description = description
+    	self.simple_description = simple_description
+    	self.runes = runes
+    	self.is_active = is_active
+
+class Rune(object):
+	
+	def __init__(self, name, skill_slug,  description, simple_description, tooltip_params):
+		self.name = name
+		self.slug = slug
+		self.description = description
+		self.simple_description = simple_description
+		self.tooltip_params = tooltip_params

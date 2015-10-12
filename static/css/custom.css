@@ -1,12 +1,45 @@
+@font-face {
+    font-family: Morpheus;
+    src: url('../fonts/MORPHEUS.TTF');
+}
+
+@font-face {
+    font-family: Mephisto;
+    src: url('../fonts/Fiolex_Mephisto.ttf');
+}
+
+@font-face {
+    font-family: Supernatural;
+    src: url('../fonts/abaddon.TTF');
+}
+
+
 @media (min-device-width: 480px) {
 	#navbar {
 		width: 80%;
 	}
 
+    main {
+        margin-top: -20px;
+    }
+
 	#searchContainer {
 		padding: 40px 20px;
 	}
 
+}
+
+#searchContainer {
+    font-family: 'Supernatural';
+}
+
+#searchContainer .container h2 {
+    font-family: 'Morpheus';
+    color: rgba(255,255,255,0.9);
+}
+
+#searchContainer > .container {
+    background-color: rgba(0,0,0,0.5);
 }
 
 .strong {
@@ -27,16 +60,13 @@
 	text-align: center;
 }
 
-.title.guild {
-    color: #69B160;
-}
-
 .heroes {
 	/* Center the heroes */
 	text-align: center;
 }
 
 .hero {
+    position: relative;
     width: 47%;
     display: inline-block;
     padding: 1em;
@@ -62,7 +92,7 @@
 .hero:hover {
     background-position: center 25%;
     background-size: auto 300px;
-    border-radius: 18px;
+    /* border-radius: 18px; */
     filter: grayscale(10%);
     -webkit-filter: grayscale(10%);
     opacity: 1;
@@ -73,16 +103,99 @@
     .hero {
         width: 90% !important;
     }
-
 }
 
 .heroes {
     text-shadow: 1px 1px #000000;
 }
 
-.player.container {
-    background-image: url('http://images2.alphacoders.com/249/249110.jpg');
-    background-size: contain;
-    opacity: 0.7;
-    filter: alpha(opacity=70); /* For IE8 and earlier */
+h1.title.tag {
+    background-color: rgba(0,0,0,0.4);
+    font-family: 'Morpheus';
+    padding: 0.1em 0;
+    text-shadow: rgb(0, 0, 0) -1px -2px 25px;
+    color: rgba(255, 255, 255, 0.75);
 }
+
+h2.title.guild {
+    font-family: 'Mephisto';
+    color: #69B160;
+    text-shadow: black -1px -2px 25px;
+}
+
+td.strong {
+    text-align: right;
+}
+
+.row td:nth-child(2) {
+    text-align: left;
+}
+
+body {
+    background-image: url('http://images2.alphacoders.com/249/249110.jpg');
+    background-size: cover;    
+}
+
+.player.container {
+    background: rgba(0,0,0,0.4);
+}
+
+header .navbar-default {
+    background-color: rgba(0,0,0,0.4);
+}
+
+.navbar-brand {
+    color: black !important;
+    transition: all .5s  ease-in-out;
+    -webkit-transition: all .5s ease-in-out;  /* Transition for Webkit browsers */
+}
+
+.navbar-brand:hover {
+    text-shadow: red 0px 0px 27px;
+}
+
+.navbar .container {
+    font-family: 'Mephisto';
+}
+
+.navbar li a {
+    color: white !important;  
+    transition: all .4s  ease-in-out;
+    -webkit-transition: all .4s  ease-in-out;  /* Transition for Webkit browsers */
+}
+
+.navbar li a:hover {
+    color: white !important;  
+    text-shadow: red -1px -2px 25px; 
+    background-color: rgba(0,0,0,0.2) !important;
+}
+
+.navbar-default {
+    border-color: #292929;
+}
+
+.navbar-default .navbar-nav>li>a {
+    border-left: 1px outset rgba(88, 7, 7, 0.2);
+    border-right: 1px inset rgba(67, 3, 3, 0.2);
+}
+
+.nav-tabs>li>a {
+    color: #555;
+    transition: all .4s  ease-in-out;
+    -webkit-transition: all .4s  ease-in-out;  /* Transition for Webkit browsers */
+}
+
+.nav-tabs>li>a:hover {
+    color: white !important;
+    text-shadow: red -1px -2px 25px; 
+    background-color: rgba(0,0,0,0.2) !important;
+}
+
+/*.navbar .background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: url('/static/images/netMetal.jpg');
+    opacity: 1;
+    background-size: cover;
+} */
